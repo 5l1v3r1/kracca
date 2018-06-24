@@ -78,7 +78,10 @@ def permutations(pool, keywords, keynums, results):
     pool = temppool[:] # save changes to pool 
     result = open(results, "w")
     for i in pool:
-       result.write(i)
+       result.write(i + "\n")
     time.sleep(5)
     done = True
+    magicnums.close()
+    magicwords.close()
+    result.close() 
 
