@@ -13,5 +13,13 @@ class Info:
         self.mode = kwargs["--enterprise"] if mode in kwargs else "--personal"
         # keeping it simple, will add more parameters later
     def generate(self, result, keywords, keynums):
-        doname(self.name, self.mode, result, keywords, keynums)
-        print("generating all name permutations...")
+        
+        # only name and email permutations are supported ATM, either me or six will add more functionality soon 
+        # the amount of factors that go into generating a plausible password is actually insane
+        # i don't think i've ever done this much math in my life and i have dyscalculia - lolcow
+
+        if self.name: 
+            doname(self.name, self.mode) 
+        if self.email: 
+            doemail(self.email, self.mode)
+

@@ -2,8 +2,7 @@ import itertools
 import threading 
 import time 
 import sys 
-
-# lolcow is the koolest kid on the block, did you know his mom lets him bring as many Lunchables as he wants to school? `
+import re
 
 def animate(): 
     for c in itertools.cycle(['|', '/', '-', '\\']): 
@@ -14,7 +13,77 @@ def animate():
         time.sleep(0.1)
     sys.stdout.write('\rDone!       ')
 
-def doname(name, mode, result, keywords, keynums): 
+# lolcow is the koolest kid on the block, did you know his mom lets him bring as many Lunchables as he wants to school? `
+
+'''
+ ______   __  __     ______     __         __     ______             
+/\  == \ /\ \/\ \   /\  == \   /\ \       /\ \   /\  ___\            
+\ \  _-/ \ \ \_\ \  \ \  __<   \ \ \____  \ \ \  \ \ \____           
+ \ \_\    \ \_____\  \ \_____\  \ \_____\  \ \_\  \ \_____\          
+  \/_/     \/_____/   \/_____/   \/_____/   \/_/   \/_____/          
+                                                                     
+ ______     __   __     ______     __    __     __  __               
+/\  ___\   /\ "-.\ \   /\  ___\   /\ "-./  \   /\ \_\ \              
+\ \  __\   \ \ \-.  \  \ \  __\   \ \ \-./\ \  \ \____ \             
+ \ \_____\  \ \_\\"\_\  \ \_____\  \ \_\ \ \_\  \/\_____\            
+  \/_____/   \/_/ \/_/   \/_____/   \/_/  \/_/   \/_____/            
+                                                                     
+ __   __     __  __     __    __     ______     ______     ______    
+/\ "-.\ \   /\ \/\ \   /\ "-./  \   /\  == \   /\  ___\   /\  == \   
+\ \ \-.  \  \ \ \_\ \  \ \ \-./\ \  \ \  __<   \ \  __\   \ \  __<   
+ \ \_\\"\_\  \ \_____\  \ \_\ \ \_\  \ \_____\  \ \_____\  \ \_\ \_\ 
+  \/_/ \/_/   \/_____/   \/_/  \/_/   \/_____/   \/_____/   \/_/ /_/ 
+                                                                     
+ ______     ______     ______     ______                             
+/\___  \   /\  ___\   /\  == \   /\  __ \                            
+\/_/  /__  \ \  __\   \ \  __<   \ \ \/\ \                           
+  /\_____\  \ \_____\  \ \_\ \_\  \ \_____\                          
+  \/_____/   \/_____/   \/_/ /_/   \/_____/
+
+	the real irc whitehat warlordz
+'''
+
+def doemail(email, mode, keywords): 
+    # parses email to extract data
+    # example: mikevirus@aol.com 
+    # names = ['mike', 'virus', 'mikevirus'] 
+    # names are added to pool
+    pool = [] 
+    email = email.split("@")
+    email = email[1:] # remove everything after @ 
+    magicwords = open(keywords, "r") 
+
+    # example: mikevirus@aol.com 
+    # after split(): mikevirus 
+    # mike is a word! pool = ['mike', 'MIKE', 'Mike'] 
+    # virus is a word! pool = ['mike', 'MIKE', 'Mike', 'virus', 'VIRUS', 'Virus']
+
+    for magicword in magicwords: 
+        upper = magicword.upper() 
+        lower = magicword.lower() 
+        cap = magicword.title() 
+        if upper in email or lower in email or cap in email: 
+            pool.append(upper) 
+            pool.append(lower) 
+            pool.append(cap)
+    if any(char.isdigit() for char in email): 
+        number = re.sub('[^0-9]','',email)
+        pool.append(number) 
+        answer = input("[!] INTERESTING NUMBER [" + number + "] FOUND. ADD TO KEYNUMBERS LIST? [Y/N]")
+        if answer = "Y" or answer = "y": 
+            keynums = open(input("path/to/keynumber-file: "), "w")
+            keynums.write(number + "\n")
+            print("[!] NUMBER ADDED.")
+        elif answer = "N" or answer = "n": 
+            print("[!] NUMBER NOT ADDED.") 
+            pass 
+   # makes strings like mikevirus, MIKEVIRUS, etc possible. thx python! 
+   for permutation in itertools.permutations(pool, 2): 
+        pool.append(permutation)
+       
+    permutations(pool)
+
+def doname(name, mode): 
     # generates initial permutations of a name, 
     pool = []
     fullname = name.split(" ") # split name into elements in an array
