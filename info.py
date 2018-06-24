@@ -2,6 +2,8 @@ from functions import *
 
 class Info: 
     def __init__(self, **kwargs): 
+        if "mode" not in kwargs: 
+            raise AttributeError("[!] mode required")
         self.name = kwargs["name"] if "name" in kwargs else None 
         self.currentyear = kwargs["currentyear"] if "currentyear" in kwargs else None 
         self.address = kwargs["address"] if "address" in kwargs else None 
@@ -10,7 +12,7 @@ class Info:
         self.dob = kwargs["dob"] if "dob" in kwargs else None
         self.email = kwargs["email"] if "email" in kwargs else None 
         self.family = kwargs["family"] if "family" in kwargs else None 
-        self.mode = kwargs["--enterprise"] if mode in kwargs else "--personal"
+        self.mode = kwargs["mode"]
         # keeping it simple, will add more parameters later
     def generate(self, result, keywords, keynums):
         
@@ -19,7 +21,7 @@ class Info:
         # i don't think i've ever done this much math in my life and i have dyscalculia - lolcow
 
         if self.name: 
-            doname(self.name, self.mode) 
+            doname(self.name, self.mode, result, keywords, keynums) 
         if self.email: 
-            doemail(self.email, self.mode)
+            doemail(self.email, self.mode, result, keywords, keynums)
 
