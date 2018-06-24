@@ -15,6 +15,7 @@ def animate():
     sys.stdout.write('\rDone!       ')
 
 def doname(name, mode, result, keywords, keynums): 
+    # generates initial permutations of a name, 
     pool = []
     fullname = name.split(" ") # split name into elements in an array
     pool.append(name.title()) 
@@ -25,14 +26,33 @@ def doname(name, mode, result, keywords, keynums):
     initials = []
     for i in fullname: 
         initials.append(i[0])
-    pool.append(str(initials).upper())
-    pool.append(str(initials).lower())
+    pool.append(''.join((initials).upper()))
+    pool.append(''.join((initials).lower()))
+    
+    # The following code is a little opaque, so i'll try to explain it 
+    # Imagine we are targeting a company named Thugcrowd Analytics Limited
+    # Naming conventions mean that possible permutations could not only be TAL, but could also be ThugcrowdAL, etc, etc 
+    # The following block handles this exception 
 
+    if mode == "--enterprise":
+        partialUpper = [] 
+        partialLower = []
+        partialUpper.append(fullname[0]) 
+        partialLower = [] 
+        for i in fullname[1:]: 
+            partialUpper.append(i.upper()) # partialUpper = ['Thugcrowd', 'A', 'L'] 
+        for i in fullname[1:]:
+            partialLower.append(i.lower()) # partialLower = ['Thugcrowd', 'a', 'l'] 
+        pool.append(''.join(partialUpper)) 
+        pool.append(''.join(partialLower))
+        pool.append(''.join(partialUpper.upper())) # THUGCROWDAL
+        pool.append(''.join(partialLower.lower())) # thugcrowdal 
     for i in fullname: 
         pool.append(i.title()) 
         pool.append(i.swapcase()) 
         pool.append(i.upper()) 
         pool.append(i.lower())
+    
     permutations(pool)
 
 def leetify(word): 
@@ -51,7 +71,7 @@ def permutations(pool, keywords, keynums, results):
     t = threading.Thread(target=animate) 
     t.start()
 
-    for word in temppool: 
+    for word in pool: 
         if " " in word: 
             for num in range(1, 1000): 
                 temppool.append(word.replace(" ", num)
