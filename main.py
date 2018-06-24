@@ -13,8 +13,8 @@ def main():
             print("====ENTERPRISE MODE====")
         elif sys.argv[1] == "--personal": 
             print("====PERSONAL MODE====")
-        else: 
-            print("choose a mode, dummy.\n")
+        if sys.argv[1] == "--help": 
+            print("--enterprise\n--personal\nformat: results.txt keywords.txt keynums.txt")
         result  = sys.argv[2] 
         keywords = sys.argv[3] 
         keynums = sys.argv[4] 
