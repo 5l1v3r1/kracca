@@ -14,14 +14,8 @@ class Info:
         self.family = kwargs["family"] if "family" in kwargs else None 
         self.mode = kwargs["mode"]
         # keeping it simple, will add more parameters later
-    def generate(self, result, keywords, keynums):
-        
-        # only name and email permutations are supported ATM, either me or six will add more functionality soon 
-        # the amount of factors that go into generating a plausible password is actually insane
-        # i don't think i've ever done this much math in my life and i have dyscalculia - lolcow
-
-        if self.name: 
-            doname(self.name, self.mode, result, keywords, keynums) 
-        if self.email: 
-            doemail(self.email, self.mode, result, keywords, keynums)
-
+    def generate(self, result, keywords, keynums, pooltxt):
+        doname(self.name, self.mode, result, keywords, keynums, pooltxt) 
+        doemail(self.email, self.mode, result, keywords, keynums, pooltxt) 
+        dophone(self.phone, self.mode, result, keywords, keynums, pooltxt)
+        permutations(result, keywords, keynums, pooltxt)

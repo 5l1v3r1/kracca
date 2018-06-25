@@ -14,10 +14,11 @@ def main():
         elif sys.argv[1] == "--personal": 
             print("====PERSONAL MODE====")
         if sys.argv[1] == "--help": 
-            print("--enterprise\n--personal\nformat: results.txt keywords.txt keynums.txt")
+            print("--enterprise\n--personal\nformat: results.txt keywords.txt keynums.txt pooltxt.txt")
         result  = sys.argv[2] 
         keywords = sys.argv[3] 
-        keynums = sys.argv[4] 
+        keynums = sys.argv[4]
+        pooltxt = sys.argv[5]
     if sys.argv[1] == "--enterprise": 
         i = Info(name=input("name: "), currentyear=input("current year: "), address=input("address: "), motto=input("motto: "), phone=input("phone: "), email=input("email: "), mode="--enterprise")
     elif sys.argv[1] == "--personal":
@@ -26,7 +27,6 @@ def main():
     print(i.name) 
     print(i.currentyear) 
     print(i.address) 
-
-    i.generate(result, keywords, keynums)
+    i.generate(result, keywords, keynums, pooltxt)
     
 main()
