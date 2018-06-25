@@ -75,8 +75,7 @@ def doemail(email, mode, result, keywords, keynums, pooltxt):
          pool.append(permutation) 
     pools = open(pooltxt, "+a")
     for i in pool:
-        print(i)
-        #pools.write(str(i) + "\n")
+        pools.write(str(i) + "\n")
 
 def dophone(phone, mode, result, keywords, keynums, pooltxt): 
     # generates all statistically plausible permutations of a phone number: 
