@@ -51,25 +51,23 @@ def doemail(email, mode, result, keywords, keynums, pooltxt):
     # names are added to pool
     pool = [] 
     email = email.split("@")
-    email = email[1:] # remove everything after @ 
+    email = email[:1] # remove everything after @ 
     magicwords = open(keywords, "r") 
-    magicnums = open(keynums, "r")
     # example: mikevirus@aol.com 
     # after split(): mikevirus 
     # mike is a word! pool = ['mike', 'MIKE', 'Mike'] 
     # virus is a word! pool = ['mike', 'MIKE', 'Mike', 'virus', 'VIRUS', 'Virus']
-
     for magicword in magicwords: 
-        upper = magicword.upper() 
-        lower = magicword.lower() 
-        cap = magicword.title() 
-        if upper in email or lower in email or cap in email: 
-            pool.append(upper) 
-            pool.append(lower) 
-            pool.append(cap)
+        if magicword in str(email):
+            pool.append(magicword.upper().rstrip())
+            pool.append(magicword.title().rstrip())
+            pool.append(magicword.lower().rstrip())
+    pool.append(str(email).upper().rstrip()) 
+    pool.append(str(email).lower().rstrip())
+    pool.append(str(email).title().rstrip())
     if any(char.isdigit() for char in email): 
         number = re.sub('[^0-9]','',email)
-        pool.append(number) 
+        pool.append(str(number)) 
     magicnums.close() 
     magicwords.close() 
    # makes strings like mikevirus, MIKEVIRUS, etc possible. thx python! 
@@ -77,7 +75,8 @@ def doemail(email, mode, result, keywords, keynums, pooltxt):
          pool.append(permutation) 
     pools = open(pooltxt, "+a")
     for i in pool:
-        pools.write(i + "\n")
+        print(i)
+        #pools.write(str(i) + "\n")
 
 def dophone(phone, mode, result, keywords, keynums, pooltxt): 
     # generates all statistically plausible permutations of a phone number: 
@@ -109,6 +108,8 @@ def doname(name, mode, result, keywords, keynums, pooltxt):
     pool.append(name.lower()) 
     pool.append(''.join(fullname).upper())
     pool.append(''.join(fullname).lower())
+    for i in len(fullname): 
+        pool.append(fullname[i])
     initials = []
     for i in fullname: 
         initials.append(i[0])
@@ -143,10 +144,13 @@ def doname(name, mode, result, keywords, keynums, pooltxt):
 
 def leetify(word): 
     leetletters = {"o" : "0", "a" : "4", "e" : "3", "i" : "1", "s" : "5", "t" : "7", "O" : "0", "A" : "4", "E" : "3", "I" : "1", "s" : "5", "T" : "7"}
+    x = ""
     for i in word:
          if i in leetletters: 
-             i = leetletters[i] 
-    return word
+             x += leetletters[i]
+         else: 
+             x += i
+    return x
 
 def permutations(result, keywords, keynums, pooltxt):  
     global done
