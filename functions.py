@@ -166,6 +166,8 @@ def permutations(result, keywords, keynums, pooltxt):
     t = threading.Thread(target=animate) 
     t.start()
 
+    for i in range(len(pool)): 
+        temppool += itertools.combinations(pool, i+1)
     for word in pool: 
         if " " in word: 
             for num in range(1, 1000): 
@@ -188,7 +190,8 @@ def permutations(result, keywords, keynums, pooltxt):
                 temppool.append(str(magicnum) + word) 
             magicwords.seek(0)
             for magicword in magicwords: 
-                temppool.append(word.rstrip() + magicword.rstrip()) 
+                temppool.append(word.rstrip() + magicword.rstrip().upper())
+                temppool.append(word.rstrip() + magicword.rstrip().lower())
                 temppool.append(magicword.rstrip() + word)
             for letter in alphabet: 
                 temppool.append(word.rstrip() + letter)
