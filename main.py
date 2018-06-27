@@ -15,6 +15,7 @@ def main():
             print("====PERSONAL MODE====")
         if sys.argv[1] == "--help": 
             print("--enterprise\n--personal\nformat: results.txt keywords.txt keynums.txt pooltxt.txt")
+            exit()
         result  = sys.argv[2] 
         keywords = sys.argv[3] 
         keynums = sys.argv[4]

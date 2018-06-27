@@ -44,6 +44,17 @@ def animate():
 	the real irc whitehat warlordz
 '''
 
+def docurrentyear(currentyear, mode, result, keywords, keynums, pooltxt): 
+    pool = []
+    x = [] 
+    pools = open(pooltxt, "+a")
+    for i in str(currentyear): 
+        x.append(int(i))
+    for j in itertools.combinations(x, len(x)): 
+        pool.append(j) 
+    for i in pool: 
+        pools.append(str(i) + "\n")
+
 def doemail(email, mode, result, keywords, keynums, pooltxt): 
     # parses email to extract data
     # example: mikevirus@aol.com 
@@ -62,39 +73,28 @@ def doemail(email, mode, result, keywords, keynums, pooltxt):
             pool.append(magicword.upper().rstrip())
             pool.append(magicword.title().rstrip())
             pool.append(magicword.lower().rstrip())
-    pool.append(str(email).upper().rstrip()) 
-    pool.append(str(email).lower().rstrip())
-    pool.append(str(email).title().rstrip())
+    pool.append(''.join(email).upper().rstrip()) 
+    pool.append(''.join(email).lower().rstrip())
+    pool.append(''.join(email).title().rstrip())
     if any(char.isdigit() for char in email): 
         number = re.sub('[^0-9]','',email)
         pool.append(str(number)) 
-    magicnums.close() 
     magicwords.close() 
    # makes strings like mikevirus, MIKEVIRUS, etc possible. thx python! 
     for permutation in itertools.permutations(pool, 2): 
-         pool.append(permutation) 
+         pool.append(''.join(permutation)) 
     pools = open(pooltxt, "+a")
     for i in pool:
         pools.write(str(i) + "\n")
 
 def dophone(phone, mode, result, keywords, keynums, pooltxt): 
-    # generates all statistically plausible permutations of a phone number: 
-    # example: 1234567890
-    # permutations: 123456789, 123, 1234, 7890, etc.
-    # the reason why i'm not feeding this into itertools and generating another
-    # 50,000 possibilities is because people never put their phone number in 
-    # random order when using it in a password; they tend to put it in full, 
-    # use the first x digits, but rarely in reverse.
     
     pool = []
     magicnums = open(keynums, "r")
     pools = open(pooltxt, "+a")
-    skip = 0
-    for i in range(len(phone)): 
-        pool.append(''.join(str(phone[skip:])))
-        skip = skip + 1
-    for num in pool: 
-        pools.write(str(num))
+    pool.append(str(phone))
+    for i in pool:
+        pools.write(str(i) + "\n")
 
 def doname(name, mode, result, keywords, keynums, pooltxt): 
     # generates initial permutations of a name, 
@@ -107,7 +107,7 @@ def doname(name, mode, result, keywords, keynums, pooltxt):
     pool.append(name.lower()) 
     pool.append(''.join(fullname).upper())
     pool.append(''.join(fullname).lower())
-    for i in len(fullname): 
+    for i in range(len(fullname)): 
         pool.append(fullname[i])
     initials = []
     for i in fullname: 
@@ -165,9 +165,14 @@ def permutations(result, keywords, keynums, pooltxt):
     temppool = pool[:] # copies pool 
     t = threading.Thread(target=animate) 
     t.start()
-
+    x = []
     for i in range(len(pool)): 
-        temppool += itertools.combinations(pool, i+1)
+        for j in itertools.combinations(pool, 2):
+            temppool.append(''.join(j).rstrip())
+        for y in itertools.combinations(pool, 3):
+            temppool.append(''.join(y).rstrip())
+    for i in x: 
+        temppool.append(''.join(i))
     for word in pool: 
         if " " in word: 
             for num in range(1, 1000): 
@@ -196,7 +201,8 @@ def permutations(result, keywords, keynums, pooltxt):
             for letter in alphabet: 
                 temppool.append(word.rstrip() + letter)
                 temppool.append(letter + word.strip())
-        temppool.append(leetify(word))
+    for word in pool: 
+        temppool.append(leetify(str(word).rstrip()))
     pool = temppool[:] # save changes to pool 
     results = open(result, "+w")
     for i in pool:
