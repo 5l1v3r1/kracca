@@ -103,7 +103,7 @@ def doemail(email, mode, result, keywords, keynums, pooltxt):
     pool = [] 
     email = email.split("@")
     email = email[:1] # remove everything after @ 
-    magicwords = open(keywords, "r") 
+    magicwords = open(keywords, "r")
     # example: mikevirus@aol.com 
     # after split(): mikevirus 
     # mike is a word! pool = ['mike', 'MIKE', 'Mike'] 
@@ -158,6 +158,7 @@ def doname(name, mode, result, keywords, keynums, pooltxt):
         initials.append(i[0])
     pool.append(''.join(initials).upper())
     pool.append(''.join(initials).lower())
+    pool.append(''.join(initials[1:]) + name)
     pools = open(pooltxt, "+a")
     # The following code is a little opaque, so i'll try to explain it 
     # Imagine we are targeting a company named Thugcrowd Analytics Limited
@@ -245,9 +246,11 @@ def permutations(result, keywords, keynums, pooltxt):
             for letter in alphabet: 
                 temppool.append(word.rstrip() + letter)
                 temppool.append(letter + word.strip())
-    for word in pool: 
-        temppool.append(leetify(str(word).rstrip()))
-    pool = temppool[:] # save changes to pool 
+    for word in temppool: 
+        x.append(leetify(str(word).rstrip()))
+    for z in x: 
+        temppool.append(z)
+    pool = list(dict.fromkeys(temppool)) # save changes to pool 
     results = open(result, "+w")
     for i in pool:
         print(i)
