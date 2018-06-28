@@ -27,6 +27,7 @@ In order for kracca to generate the most relevant password sets, it must be give
 * The current year for enterprise 
 
 The more information you feed kracca, the higher the chance that kracca will generate a correct password. **kracca is only as good as the information you give it.**
+This program might eat up your RAM, so please don't run this on a microwave
 
 ### keynums.txt 
 
