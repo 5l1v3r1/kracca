@@ -186,6 +186,38 @@ def doname(name, mode, result, keywords, keynums, pooltxt):
     for i in pool: 
         pools.write(i + "\n")
 
+def doaliases(aliases, mode, result, keywords, keynums, pooltxt):
+    pool = [] 
+    pools = open(pooltxt, "+a")
+    dictionary = open(keywords, "r")
+    aliases = aliases.split(" ")
+    for i in aliases: 
+        pool.append(i.upper()) 
+        pool.append(i.lower()) 
+        pool.append(i.title())
+        pool.append(leetify(i))
+        pool.append(xify(i))
+    #for word in dictionary: 
+    #    for i in aliases: 
+    #        if word in i: 
+    #            pool.append(i.upper()) 
+    #            pool.append(i.lower())
+    #            pool.append(i.title())
+    #            pool.append(leetify(i))
+    #            pool.append(xify(i))
+    for i in pool:
+        pools.write(i + "\n")
+
+def xify(word): 
+    vowels = ["a", "e", "i", "o", "u"]
+    x = ""
+    for i in word: 
+        if i.lower() in vowels: 
+            x += "x"
+        else:
+            x += i
+    return x
+
 def leetify(word): 
     leetletters = {"o" : "0", "a" : "4", "e" : "3", "i" : "1", "s" : "5", "t" : "7", "O" : "0", "A" : "4", "E" : "3", "I" : "1", "s" : "5", "T" : "7"}
     x = ""

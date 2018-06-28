@@ -7,6 +7,7 @@ class Info:
         self.name = kwargs["name"] if "name" in kwargs else None 
         self.currentyear = kwargs["currentyear"] if "currentyear" in kwargs else None 
         self.address = kwargs["address"] if "address" in kwargs else None 
+        self.aliases = kwargs["aliases"] if "aliases" in kwargs else None
         self.motto = kwargs["motto"] if "motto" in kwargs else None 
         self.phone = kwargs["phone"] if "phone" in kwargs else None 
         self.dob = kwargs["dob"] if "dob" in kwargs else None
@@ -18,4 +19,11 @@ class Info:
         doname(self.name, self.mode, result, keywords, keynums, pooltxt) 
         doemail(self.email, self.mode, result, keywords, keynums, pooltxt) 
         dophone(self.phone, self.mode, result, keywords, keynums, pooltxt)
+        if self.mode == "--enterprise":
+            if self.address:
+                doaddress(self.address, self.mode, result, keywords, keynums, pooltxt) 
+        if self.mode == "--personal":
+            doaliases(self.aliases, self.mode, result, keywords, keynums, pooltxt)
+            #dofamily(self.family, self.mode, result, keywords, keynums, pooltxt)
+            #dodob(self.dob, self.mode, result, keywords, keynums, pooltxt) 
         permutations(result, keywords, keynums, pooltxt)
