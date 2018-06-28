@@ -55,6 +55,46 @@ def docurrentyear(currentyear, mode, result, keywords, keynums, pooltxt):
     for i in pool: 
         pools.append(str(i) + "\n")
 
+def doaddress(address, mode, result, keywords, keynums, pooltxt): 
+    pool = [] 
+    names = ['drive', 'circle', 'road', 'highway', 'way', 'terrace', 'pike', 'street', 'trail', 'lane', 'line', 'avenue', 'alley', 'byway', 'cross', 'passage', 'turnpike', 'parkway', 'court', 'boulevard', 'place', 'track', 'passage', 'route']
+    # Format should be: address[0] = street number
+    #                   address[1] = street name 
+    magicnums = open(keynums, "r")
+    pools = open(pooltxt, "+a")
+    address = address.split(" ")
+    for i in names: 
+        if i.title() in address: 
+            address.remove(i.title()) 
+    streetnumber = int(address[0]) 
+    streetname = str(address[1]) 
+    pool.append(streetnumber) 
+    pool.append(streetname.upper()) 
+    pool.append(streetname.lower()) 
+    pool.append(streetname.upper()) 
+    
+    for i in pool: 
+        pools.write(str(i) + "\n")
+
+def dodob(dob, mode, result, keywords, keynums, pooltxt): 
+    pool = [] 
+    pools = open(pooltxt, "+a") 
+    dob = dob.split("/") 
+    months = { 1 : "January", 2 : "Feburary", 3 : "March", 4 : "April", 5 : "May", 6 : "June", 7 : "July", 8 : "August", 9 : "September", 10 : "October", 11 : "November", 12 : "December"}
+    # dd/mm/yyyy
+    day = dob[0].lstrip('0')
+    month = dob[1].lstrip('0') 
+    year = dob[2]
+    shortmonth = months[month]
+    shortmonth = shortmonth[:3]
+    pool.append(''.join(year))
+    pool.append(''.join(month))
+    pool.append(''.join(day))
+    pool.append(shortmonth) 
+
+    for i in pool: 
+        pools.write(i + "\n")
+
 def doemail(email, mode, result, keywords, keynums, pooltxt): 
     # parses email to extract data
     # example: mikevirus@aol.com 
@@ -100,7 +140,11 @@ def doname(name, mode, result, keywords, keynums, pooltxt):
     # generates initial permutations of a name, 
    
     pool = []
-    fullname = name.split(" ") # split name into elements in an array
+    if " " in name:
+        fullname = name.split(" ") # split name into elements in an array
+    else: 
+        fullname = [] 
+        fullname.append(name)
     pool.append(name.title()) 
     pool.append(name.swapcase()) 
     pool.append(name.upper()) 
