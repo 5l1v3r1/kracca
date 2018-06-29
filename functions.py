@@ -195,16 +195,14 @@ def doaliases(aliases, mode, result, keywords, keynums, pooltxt):
         pool.append(i.upper()) 
         pool.append(i.lower()) 
         pool.append(i.title())
-        pool.append(leetify(i))
         pool.append(xify(i))
-    #for word in dictionary: 
-    #    for i in aliases: 
-    #        if word in i: 
-    #            pool.append(i.upper()) 
-    #            pool.append(i.lower())
-    #            pool.append(i.title())
-    #            pool.append(leetify(i))
-    #            pool.append(xify(i))
+        tmp = leetify(i) 
+        for x in tmp: 
+            pool.append(x.upper())
+            pool.append(x.lower())
+            pool.append(x.title())
+        if "_" in aliases: 
+            i = i.split(" ")
     for i in pool:
         pools.write(i + "\n")
 
@@ -219,14 +217,19 @@ def xify(word):
     return x
 
 def leetify(word): 
-    leetletters = {"o" : "0", "a" : "4", "e" : "3", "i" : "1", "s" : "5", "t" : "7", "O" : "0", "A" : "4", "E" : "3", "I" : "1", "s" : "5", "T" : "7"}
-    x = ""
-    for i in word:
-         if i in leetletters: 
-             x += leetletters[i]
-         else: 
-             x += i
-    return x
+    LEETERS = {
+            "i" : "1!|",
+            "o" : "0",
+            "s" : "5$",
+            "e" : "3",
+            "a" : "4@",
+            "t" : "7", 
+            } 
+    possibilities = [z + LEETERS.get(z, "") for z in word] 
+    tmp = []
+    for sub in itertools.product(*possibilities): 
+        tmp.append("".join(sub))
+    return tmp
 
 def permutations(result, keywords, keynums, pooltxt):  
     global done
@@ -279,7 +282,9 @@ def permutations(result, keywords, keynums, pooltxt):
                 temppool.append(word.rstrip() + letter)
                 temppool.append(letter + word.strip())
     for word in temppool: 
-        x.append(leetify(str(word).rstrip()))
+        tmp = leetify(str(word).rstrip())
+        for x in tmp: 
+            temppool.append(x)
     for z in x: 
         temppool.append(z)
     pool = list(dict.fromkeys(temppool)) # save changes to pool 
