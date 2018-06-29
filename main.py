@@ -5,7 +5,7 @@ import sys
 def main(): 
     f = Figlet(font='slant')
     print(f.renderText('kracca'))
-    print("i love cock")
+    print("lol @ six")
     if len(sys.argv) == 0:
         print("must provide mode:\n--enterprise:    includes address and differing name permutations in results\n--personal:    includes DOB and family permutations")
     else: 
