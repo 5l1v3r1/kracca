@@ -104,7 +104,7 @@ def doemails(emails, mode, result, keywords, keynums, pooltxt):
     emails = emails.split(" ")
     for i in emails:
         i = i.split(" ")
-        i = [:1]
+        i = i[:1]
     magicwords = open(keywords, "r")
     # example: mikevirus@aol.com 
     # after split(): mikevirus 
@@ -129,6 +129,12 @@ def doemails(emails, mode, result, keywords, keynums, pooltxt):
     pools = open(pooltxt, "+a")
     for i in pool:
         pools.write(str(i) + "\n")
+
+def dofamily(family, mode, result, keywords, keynums, pooltxt): 
+    pool = [] 
+    names = names.split(" ") 
+    for name in names: 
+        pool.append(name)
 
 def dophone(phone, mode, result, keywords, keynums, pooltxt): 
     
