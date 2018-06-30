@@ -95,30 +95,33 @@ def dodob(dob, mode, result, keywords, keynums, pooltxt):
     for i in pool: 
         pools.write(i + "\n")
 
-def doemail(email, mode, result, keywords, keynums, pooltxt): 
+def doemails(emails, mode, result, keywords, keynums, pooltxt): 
     # parses email to extract data
     # example: mikevirus@aol.com 
     # names = ['mike', 'virus', 'mikevirus'] 
     # names are added to pool
     pool = [] 
-    email = email.split("@")
-    email = email[:1] # remove everything after @ 
+    emails = emails.split(" ")
+    for i in emails:
+        i = i.split(" ")
+        i = [:1]
     magicwords = open(keywords, "r")
     # example: mikevirus@aol.com 
     # after split(): mikevirus 
     # mike is a word! pool = ['mike', 'MIKE', 'Mike'] 
     # virus is a word! pool = ['mike', 'MIKE', 'Mike', 'virus', 'VIRUS', 'Virus']
-    for magicword in magicwords: 
-        if magicword in str(email):
-            pool.append(magicword.upper().rstrip())
-            pool.append(magicword.title().rstrip())
-            pool.append(magicword.lower().rstrip())
-    pool.append(''.join(email).upper().rstrip()) 
-    pool.append(''.join(email).lower().rstrip())
-    pool.append(''.join(email).title().rstrip())
-    if any(char.isdigit() for char in email): 
-        number = re.sub('[^0-9]','',email)
-        pool.append(str(number)) 
+    for email in emails:
+        for magicword in magicwords: 
+            if magicword in str(email):
+                pool.append(magicword.upper().rstrip())
+                pool.append(magicword.title().rstrip())
+                pool.append(magicword.lower().rstrip())
+        pool.append(''.join(email).upper().rstrip()) 
+        pool.append(''.join(email).lower().rstrip())
+        pool.append(''.join(email).title().rstrip())
+        if any(char.isdigit() for char in email): 
+            number = re.sub('[^0-9]','',email)
+            pool.append(str(number)) 
     magicwords.close() 
    # makes strings like mikevirus, MIKEVIRUS, etc possible. thx python! 
     for permutation in itertools.permutations(pool, 2): 
