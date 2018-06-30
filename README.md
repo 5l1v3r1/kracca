@@ -46,3 +46,13 @@ keynums is a pre-made list of numbers that are likely to be part of a password. 
 keywords is a pre-made wordlist that is a compilation of cracklib's wordlist, /usr/share/dict words for American and British English and Spanish. As with keynums, you can add words relevant to the target in order to increase accuracy.
 
 oh, and FUCK SIX
+
+i
+l
+o
+v
+e
+c
+o
+c
+k
