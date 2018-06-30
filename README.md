@@ -6,15 +6,15 @@ relevant information like name, address, phone, etc.
 ```
 Name: John Doe
 DOB: 13 Feb 1999
+Email: seahawks1999@aol.com
 Generated passwords: 
 johndoe 
-j0hnd03
-j0hn123 
-johndoe199
-1321999
+J0hnd03
+seahawks1999
 john1999
-Doe1999
-JohnDoe1321999
+jd1999
+132199
+s34h4wks
 etc...
 ```
 
@@ -27,7 +27,15 @@ In order for kracca to generate the most relevant password sets, it must be give
 * The current year for enterprise 
 
 The more information you feed kracca, the higher the chance that kracca will generate a correct password. **kracca is only as good as the information you give it.**
-This program might eat up your RAM, so please don't run this on a microwave
+
+### Requirements 
+* At least 4GB RAM 
+* At least an i3 processor 
+* 1-2 GB of free storage
+
+### Upcoming
+* A better wordlist (current one is every single word in the English language, hope to replace this with top 2000 words used in passwords for less overhead) 
+* Intelligent identification and classification of interesting strings / numbers used consistently across emails, aliases, etc
 
 ### keynums.txt 
 
