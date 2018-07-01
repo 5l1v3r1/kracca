@@ -23,7 +23,7 @@ def main():
     if sys.argv[1] == "--enterprise": 
         i = Info(name=input("name: "), currentyear=input("current year: "), address=input("address: "), motto=input("motto: "), phone=input("phone: "), email=input("email: "), mode="--enterprise")
     elif sys.argv[1] == "--personal":
-        i = Info(name=input("name: "), aliases=input("aliases: "),address=input("address: "), phone=input("phone: "), email=input("email: "), mode="--personal")
+        i = Info(name=input("name: "), aliases=input("aliases: "),address=input("address: "), phone=input("phone: "), email=input("emails: "), family=input("family names: "), mode="--personal")
     print("bl1ng bl1ng i c u ;)")
     i.generate(result, keywords, keynums, pooltxt)
     

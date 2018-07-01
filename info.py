@@ -24,6 +24,6 @@ class Info:
                 doaddress(self.address, self.mode, result, keywords, keynums, pooltxt) 
         if self.mode == "--personal":
             doaliases(self.aliases, self.mode, result, keywords, keynums, pooltxt)
-            #dofamily(self.family, self.mode, result, keywords, keynums, pooltxt)
+            dofamily(self.family, self.mode, result, keywords, keynums, pooltxt)
             #dodob(self.dob, self.mode, result, keywords, keynums, pooltxt) 
         permutations(result, keywords, keynums, pooltxt)
