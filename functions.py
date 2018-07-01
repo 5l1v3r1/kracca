@@ -131,10 +131,15 @@ def doemails(emails, mode, result, keywords, keynums, pooltxt):
         pools.write(str(i) + "\n")
 
 def dofamily(family, mode, result, keywords, keynums, pooltxt): 
+
     pool = [] 
+    pools = open(pooltxt, "+a")
     names = names.split(" ") 
     for name in names: 
-        pool.append(name)
+        pool.append(name.upper())
+        pool.append(name.lower()
+    for i in pool: 
+        pools.write(i + "\n")
 
 def dophone(phone, mode, result, keywords, keynums, pooltxt): 
     
