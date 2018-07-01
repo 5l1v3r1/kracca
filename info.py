@@ -13,6 +13,7 @@ class Info:
         self.dob = kwargs["dob"] if "dob" in kwargs else None
         self.email = kwargs["email"] if "email" in kwargs else None 
         self.family = kwargs["family"] if "family" in kwargs else None 
+        self.penissize = kwargs["penissize"] if "penissize" in kwargs else None 
         self.mode = kwargs["mode"]
         # keeping it simple, will add more parameters later
     def generate(self, result, keywords, keynums, pooltxt):
