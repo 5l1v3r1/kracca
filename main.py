@@ -7,6 +7,10 @@ def main():
     print(f.renderText('kracca'))
     if len(sys.argv) == 0:
         print("must provide mode:\n--enterprise:    includes address and differing name permutations in results\n--personal:    includes DOB and family permutations")
+        exit()
+    elif len(sys.argv) != 6: 
+        print("--enterprise\n--personal\nformat: results.txt keywords.txt keynums.txt pooltxt.txt")
+        exit()
     else: 
         if sys.argv[1] == "--enterprise": 
             print("====ENTERPRISE MODE====")

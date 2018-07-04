@@ -137,7 +137,7 @@ def dofamily(family, mode, result, keywords, keynums, pooltxt):
     names = names.split(" ") 
     for name in names: 
         pool.append(name.upper())
-        pool.append(name.lower()
+        pool.append(name.lower())
     for i in pool: 
         pools.write(i + "\n")
 
