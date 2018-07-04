@@ -38,12 +38,3 @@ The more information you feed kracca, the higher the chance that kracca will gen
 * Intelligent identification and classification of interesting strings / numbers used consistently across emails, aliases, etc
 * Organized wordlists by topic, eg infosec, sport, video games, etc. 
 
-## keynums.txt 
-
-keynums is a pre-made list of numbers that are likely to be part of a password. You can add numbers that are relevant to the target, such as DOB, numbers of special personal or organizational significance, etc, to this list. 
-
-## keywords.txt 
-
-keywords is a pre-made wordlist that is a compilation of cracklib's wordlist, /usr/share/dict words for American and British English and Spanish. As with keynums, you can add words relevant to the target in order to increase accuracy.
----
-yes it's actually me messaging you on twitter chloe you fool 

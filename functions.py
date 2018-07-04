@@ -294,7 +294,7 @@ def permutations(result, keywords, keynums, pooltxt):
                 temppool.append(magicword.rstrip() + word)
             for letter in alphabet: 
                 temppool.append(word.rstrip() + letter)
-                temppool.append(letter + word.strip())
+                temppool.append(letter + word.rstrip())
     for word in temppool: 
         tmp = leetify(str(word).rstrip())
         for x in tmp: 
