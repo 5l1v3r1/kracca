@@ -37,4 +37,4 @@ The more information you feed kracca, the higher the chance that kracca will gen
 * A better wordlist (current one is every single word in the English language, hope to replace this with top 2000 words used in passwords for less overhead) 
 * Intelligent identification and classification of interesting strings / numbers used consistently across emails, aliases, etc
 * Organized wordlists by topic, eg infosec, sport, video games, etc. 
-
+* Multithreading (this will never happen i am too lazy)
