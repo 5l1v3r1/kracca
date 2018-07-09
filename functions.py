@@ -117,7 +117,6 @@ def doemails(emails, mode, result, keywords, keynums, pooltxt):
                 pool.append(magicword.title().rstrip())
                 pool.append(magicword.lower().rstrip())
         pool.append(''.join(email).upper().rstrip()) 
-        pool.append(''.join(email).lower().rstrip())
         pool.append(''.join(email).title().rstrip())
         if any(char.isdigit() for char in email): 
             number = re.sub('[^0-9]','',email)
@@ -233,11 +232,19 @@ def xify(word):
 def leetify(word): 
     LEETERS = {
             "i" : "1!|",
+            "I" : "1!|",
             "o" : "0",
+            "O" : "0", 
             "s" : "5$",
+            "S" : "5$",
             "e" : "3",
+            "E" : "3",
             "a" : "4@",
-            "t" : "7", 
+            "A" : "4@",
+            "t" : "7",
+            "T" : "7", 
+            "c" : "([<"
+            "C" : "([<"
             } 
     possibilities = [z + LEETERS.get(z, "") for z in word] 
     tmp = []
@@ -297,8 +304,8 @@ def permutations(result, keywords, keynums, pooltxt):
                 temppool.append(letter + word.rstrip())
     for word in temppool: 
         tmp = leetify(str(word).rstrip())
-        for x in tmp: 
-            temppool.append(x)
+        for word in tmp: 
+            temppool.append(word)
     for z in x: 
         temppool.append(z)
     pool = list(dict.fromkeys(temppool)) # save changes to pool 
