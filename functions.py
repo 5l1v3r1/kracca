@@ -254,8 +254,6 @@ def permutations(result, keywords, keynums, pooltxt, capital, numbers):
     done = False
     # given a pool of possibilities, combine with data to add to results
     alphabet = "aAbBcCdDeEfFgGhHiIjJkKlLmMnNoOpPqQrRsStTuUvVwWxXyYzZ"
-    magicwords = open(keywords, "r") 
-    magicnums = open(keynums, "r") 
     pooltxt = open(pooltxt, "r") 
     pool = [] 
     for i in pooltxt: 
@@ -275,27 +273,31 @@ def permutations(result, keywords, keynums, pooltxt, capital, numbers):
         if " " in word: 
             for num in range(1, 1000): 
                 temppool.append(word.replace(" ", str(num).rstrip()))
-            magicnums.seek(0)
-            for magicnum in magicnums:
-               temppool.append(word.replace(" ", str(magicnum).rstrip()))
-            magicwords.seek(0)
-            for magicword in magicwords: 
-                temppool.append(word.replace(" ", magicword.rstrip())) 
+            with open(keynums, "r") as magicnums:
+                for magicnum in magicnums:
+                    temppool.append(word.replace(" ", str(magicnum).rstrip()))
+            magicnums.close()
+            with open(keywords, "r") as magicwords: 
+                for magicword in magicwords: 
+                    temppool.append(word.replace(" ", magicword.rstrip())) 
+            magicwords.close()
             for letter in alphabet: 
                 temppool.append(word.replace(" ", letter))
         else: 
             for num in range(1, 1000): 
                 temppool.append(word + str(num)) 
                 temppool.append(str(num) + word) 
-            magicnums.seek(0) 
-            for magicnum in magicnums: 
-                temppool.append(word + str(magicnum).rstrip()) 
-                temppool.append(str(magicnum) + word) 
-            magicwords.seek(0)
-            for magicword in magicwords: 
-                temppool.append(word.rstrip() + magicword.rstrip().upper())
-                temppool.append(word.rstrip() + magicword.rstrip().lower())
-                temppool.append(magicword.rstrip() + word)
+            with open(keynums, "r") as magicnums: 
+                for magicnum in magicnums: 
+                    temppool.append(word + str(magicnum).rstrip()) 
+                    temppool.append(str(magicnum) + word) 
+                magicnums.close() 
+            with open(keywords, "r") as magicwords:
+                for magicword in magicwords: 
+                    temppool.append(word.rstrip() + magicword.rstrip().upper())
+                    temppool.append(word.rstrip() + magicword.rstrip().lower())
+                    temppool.append(magicword.rstrip() + word)
+                magicwords.close()
             for letter in alphabet: 
                 temppool.append(word.rstrip() + letter)
                 temppool.append(letter + word.rstrip())
