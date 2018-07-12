@@ -130,7 +130,6 @@ def doemails(emails, mode, result, keywords, keynums, pooltxt):
         pools.write(str(i) + "\n")
 
 def dofamily(family, mode, result, keywords, keynums, pooltxt): 
-
     pool = [] 
     pools = open(pooltxt, "+a")
     names = names.split(" ") 
@@ -141,7 +140,6 @@ def dofamily(family, mode, result, keywords, keynums, pooltxt):
         pools.write(i + "\n")
 
 def dophone(phone, mode, result, keywords, keynums, pooltxt): 
-    
     pool = []
     magicnums = open(keynums, "r")
     pools = open(pooltxt, "+a")
@@ -150,8 +148,7 @@ def dophone(phone, mode, result, keywords, keynums, pooltxt):
         pools.write(str(i) + "\n")
 
 def doname(name, mode, result, keywords, keynums, pooltxt): 
-    # generates initial permutations of a name, 
-   
+    # generates initial permutations of a name,  
     pool = []
     if " " in name:
         fullname = name.split(" ") # split name into elements in an array
@@ -243,7 +240,7 @@ def leetify(word):
             "A" : "4@",
             "t" : "7",
             "T" : "7", 
-            "c" : "([<"
+            "c" : "([<",
             "C" : "([<"
             } 
     possibilities = [z + LEETERS.get(z, "") for z in word] 
@@ -308,6 +305,7 @@ def permutations(result, keywords, keynums, pooltxt):
             temppool.append(word)
     for z in x: 
         temppool.append(z)
+
     pool = list(dict.fromkeys(temppool)) # save changes to pool 
     results = open(result, "+w")
     for i in pool:
