@@ -1,4 +1,5 @@
 from functions import * 
+from subprocess import call 
 
 class Info: 
     def __init__(self, **kwargs): 
@@ -14,10 +15,12 @@ class Info:
         self.email = kwargs["email"] if "email" in kwargs else None 
         self.family = kwargs["family"] if "family" in kwargs else None 
         self.mode = kwargs["mode"]
+        self.capitalfilter = kwargs["capitalfilter"] if "capitalfilter" in kwargs else None
+        self.numberfilter = kwargs["numberfilter"] if "numberfilter" in kwargs else None 
         # keeping it simple, will add more parameters later
     def generate(self, result, keywords, keynums, pooltxt):
         doname(self.name, self.mode, result, keywords, keynums, pooltxt) 
-        doemail(self.email, self.mode, result, keywords, keynums, pooltxt) 
+        doemails(self.email, self.mode, result, keywords, keynums, pooltxt) 
         dophone(self.phone, self.mode, result, keywords, keynums, pooltxt)
         if self.mode == "--enterprise":
             if self.address:
@@ -26,4 +29,5 @@ class Info:
             doaliases(self.aliases, self.mode, result, keywords, keynums, pooltxt)
             dofamily(self.family, self.mode, result, keywords, keynums, pooltxt)
             #dodob(self.dob, self.mode, result, keywords, keynums, pooltxt) 
-        permutations(result, keywords, keynums, pooltxt)
+        permutations(result, keywords, keynums, pooltxt, self.capitalfilter, self.numberfilter)
+

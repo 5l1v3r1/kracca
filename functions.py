@@ -103,7 +103,7 @@ def doemails(emails, mode, result, keywords, keynums, pooltxt):
     pool = [] 
     emails = emails.split(" ")
     for i in emails:
-        i = i.split(" ")
+        i = i.split("@")
         i = i[:1]
     magicwords = open(keywords, "r")
     # example: mikevirus@aol.com 
@@ -249,7 +249,7 @@ def leetify(word):
         tmp.append("".join(sub))
     return tmp
 
-def permutations(result, keywords, keynums, pooltxt):  
+def permutations(result, keywords, keynums, pooltxt, capital, numbers):  
     global done
     done = False
     # given a pool of possibilities, combine with data to add to results
@@ -305,7 +305,24 @@ def permutations(result, keywords, keynums, pooltxt):
             temppool.append(word)
     for z in x: 
         temppool.append(z)
-
+    for permutation in temppool: 
+        if capital == True and numbers == False: 
+            if permutation.isalnum() == True: 
+                pass
+            else: 
+                temppool.remove(permutation) 
+        elif capital == True: 
+            if bool(re.match('^[A-Z]+$', permutation)) == True: 
+                pass
+            else: 
+                temppool.remove(permutation) 
+        elif numbers == True: 
+            if bool(re.match('^[0-9]+$', permutation)) == True: 
+                pass
+            else: 
+                temppool.remove(permutation) 
+        else: 
+            pass
     pool = list(dict.fromkeys(temppool)) # save changes to pool 
     results = open(result, "+w")
     for i in pool:
