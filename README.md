@@ -18,23 +18,16 @@ s34h4wks
 etc...
 ```
 
-# Usage 
-In order for kracca to generate the most relevant password sets, it must be given accurate data. The following fields are recommended: 
+# Needed
 * Name of target company or target person 
 * Date of birth for person 
 * Address for company
 * Phone number of enterprise or person
 * The current year for enterprise 
 
-The more information you feed kracca, the higher the chance that kracca will generate a correct password. **kracca is only as good as the information you give it.**
-
 ### Requirements 
 * At least 4GB RAM 
-* At least an i3 processor 
+* At least an i5 processor 
 * 1-2 GB of free storage
 
-### Upcoming
-* A better wordlist (current one is every single word in the English language, hope to replace this with top 2000 words used in passwords for less overhead) 
-* Intelligent identification and classification of interesting strings / numbers used consistently across emails, aliases, etc
-* Organized wordlists by topic, eg infosec, sport, video games, etc. 
-* Multithreading (this will never happen i am too lazy)
+I need to reorganize the code to allow multithreading to happen in order to save RAM, but I'm busy and this probably won't be happening any time soon.

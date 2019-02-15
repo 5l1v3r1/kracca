@@ -14,36 +14,6 @@ def animate():
     sys.stdout.flush()
     sys.stdout.write('\rDone!\n')
 
-# lolcow is the koolest kid on the block, did you know his mom lets him bring as many Lunchables as he wants to school? `
-
-'''
- ______   __  __     ______     __         __     ______             
-/\  == \ /\ \/\ \   /\  == \   /\ \       /\ \   /\  ___\            
-\ \  _-/ \ \ \_\ \  \ \  __<   \ \ \____  \ \ \  \ \ \____           
- \ \_\    \ \_____\  \ \_____\  \ \_____\  \ \_\  \ \_____\          
-  \/_/     \/_____/   \/_____/   \/_____/   \/_/   \/_____/          
-                                                                     
- ______     __   __     ______     __    __     __  __               
-/\  ___\   /\ "-.\ \   /\  ___\   /\ "-./  \   /\ \_\ \              
-\ \  __\   \ \ \-.  \  \ \  __\   \ \ \-./\ \  \ \____ \             
- \ \_____\  \ \_\\"\_\  \ \_____\  \ \_\ \ \_\  \/\_____\            
-  \/_____/   \/_/ \/_/   \/_____/   \/_/  \/_/   \/_____/            
-                                                                     
- __   __     __  __     __    __     ______     ______     ______    
-/\ "-.\ \   /\ \/\ \   /\ "-./  \   /\  == \   /\  ___\   /\  == \   
-\ \ \-.  \  \ \ \_\ \  \ \ \-./\ \  \ \  __<   \ \  __\   \ \  __<   
- \ \_\\"\_\  \ \_____\  \ \_\ \ \_\  \ \_____\  \ \_____\  \ \_\ \_\ 
-  \/_/ \/_/   \/_____/   \/_/  \/_/   \/_____/   \/_____/   \/_/ /_/ 
-                                                                     
- ______     ______     ______     ______                             
-/\___  \   /\  ___\   /\  == \   /\  __ \                            
-\/_/  /__  \ \  __\   \ \  __<   \ \ \/\ \                           
-  /\_____\  \ \_____\  \ \_\ \_\  \ \_____\                          
-  \/_____/   \/_____/   \/_/ /_/   \/_____/
-
-	the real irc whitehat warlordz
-'''
-
 def docurrentyear(currentyear, mode, result, keywords, keynums, pooltxt): 
     pool = []
     x = [] 
@@ -170,10 +140,6 @@ def doname(name, mode, result, keywords, keynums, pooltxt):
     pool.append(''.join(initials).lower())
     pool.append(''.join(initials[1:]) + name)
     pools = open(pooltxt, "+a")
-    # The following code is a little opaque, so i'll try to explain it 
-    # Imagine we are targeting a company named Thugcrowd Analytics Limited
-    # Naming conventions mean that possible permutations could not only be TAL, but could also be ThugcrowdAL, etc, etc 
-    # The following block handles this exception 
 
     if mode == "--enterprise":
         partialUpper = [] 
