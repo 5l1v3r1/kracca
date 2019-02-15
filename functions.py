@@ -16,10 +16,8 @@ def animate():
 
 def docurrentyear(currentyear, mode, result, keywords, keynums, pooltxt): 
     pool = []
-    x = [] 
     pools = open(pooltxt, "+a")
-    for i in str(currentyear): 
-        x.append(int(i))
+    x = [int(i) for i in str(currentyear)]
     for j in itertools.combinations(x, len(x)): 
         pool.append(j) 
     for i in pool: 
@@ -30,7 +28,6 @@ def doaddress(address, mode, result, keywords, keynums, pooltxt):
     names = ['drive', 'circle', 'road', 'highway', 'way', 'terrace', 'pike', 'street', 'trail', 'lane', 'line', 'avenue', 'alley', 'byway', 'cross', 'passage', 'turnpike', 'parkway', 'court', 'boulevard', 'place', 'track', 'passage', 'route']
     # Format should be: address[0] = street number
     #                   address[1] = street name 
-    magicnums = open(keynums, "r")
     pools = open(pooltxt, "+a")
     address = address.split(" ")
     for i in names: 
@@ -75,23 +72,16 @@ def doemails(emails, mode, result, keywords, keynums, pooltxt):
     for i in emails:
         i = i.split("@")
         i = i[:1]
-    magicwords = open(keywords, "r")
     # example: mikevirus@aol.com 
     # after split(): mikevirus 
     # mike is a word! pool = ['mike', 'MIKE', 'Mike'] 
     # virus is a word! pool = ['mike', 'MIKE', 'Mike', 'virus', 'VIRUS', 'Virus']
     for email in emails:
-        for magicword in magicwords: 
-            if magicword in str(email):
-                pool.append(magicword.upper().rstrip())
-                pool.append(magicword.title().rstrip())
-                pool.append(magicword.lower().rstrip())
         pool.append(''.join(email).upper().rstrip()) 
         pool.append(''.join(email).title().rstrip())
         if any(char.isdigit() for char in email): 
             number = re.sub('[^0-9]','',email)
             pool.append(str(number)) 
-    magicwords.close() 
    # makes strings like mikevirus, MIKEVIRUS, etc possible. thx python! 
     for permutation in itertools.permutations(pool, 2): 
          pool.append(''.join(permutation)) 
@@ -142,14 +132,9 @@ def doname(name, mode, result, keywords, keynums, pooltxt):
     pools = open(pooltxt, "+a")
 
     if mode == "--enterprise":
-        partialUpper = [] 
-        partialLower = []
+        partialLower = [i.lower() for i in fullname[1:]] 
+        partialUpper = [i.upper() for i in fullname[1:]]
         partialUpper.append(fullname[0]) 
-        partialLower = [] 
-        for i in fullname[1:]: 
-            partialUpper.append(i.upper()) # partialUpper = ['Thugcrowd', 'A', 'L'] 
-        for i in fullname[1:]:
-            partialLower.append(i.lower()) # partialLower = ['Thugcrowd', 'a', 'l'] 
         pool.append(''.join(partialUpper)) 
         pool.append(''.join(partialLower))
         pool.append(''.join(partialUpper).upper()) # THUGCROWDAL
@@ -294,7 +279,6 @@ def permutations(result, keywords, keynums, pooltxt, capital, numbers):
     pool = list(dict.fromkeys(temppool)) # save changes to pool 
     results = open(result, "+w")
     for i in pool:
-        print(i)
         results.write(str(i).rstrip() + "\n")
     time.sleep(5)
     done = True
