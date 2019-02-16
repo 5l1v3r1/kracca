@@ -3,8 +3,7 @@ from info import Info
 import sys
 
 def hlp(): 
-    print("--enterprise     enterprise mode\n--personal     personal mode\n--caps-only     filters output for passwords that contain only capital letters\n--with-nums     filters output for passwords that contain numbers")
-
+    print("usage: python main.py results.txt keywords.txt keynums.txt pooltext.txt\n--enterprise     enterprise mode\n--personal     personal mode\n--caps-only     filters output for passwords that contain only capital letters\n--with-nums     filters output for passwords that contain numbers")
 
 def main(): 
     f = Figlet(font='slant')
