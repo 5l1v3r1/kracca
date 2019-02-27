@@ -92,7 +92,7 @@ def doemails(emails, mode, result, keywords, keynums, pooltxt):
 def dofamily(family, mode, result, keywords, keynums, pooltxt): 
     pool = [] 
     pools = open(pooltxt, "+a")
-    names = names.split(" ") 
+    names = family.split(" ") 
     for name in names: 
         pool.append(name.upper())
         pool.append(name.lower())
@@ -222,22 +222,12 @@ def permutations(result, keywords, keynums, pooltxt, capital, numbers):
         temppool.append(''.join(i))
     for word in pool: 
         if " " in word: 
-            for num in range(1, 1000): 
-                temppool.append(word.replace(" ", str(num).rstrip()))
-            with open(keynums, "r") as magicnums:
-                for magicnum in magicnums:
-                    temppool.append(word.replace(" ", str(magicnum).rstrip()))
-            magicnums.close()
-            with open(keywords, "r") as magicwords: 
-                for magicword in magicwords: 
-                    temppool.append(word.replace(" ", magicword.rstrip())) 
-            magicwords.close()
             for letter in alphabet: 
                 temppool.append(word.replace(" ", letter))
+            temppool.extend([word.replace(" ", str(x)) for x in range(1, 1000)])
         else: 
-            for num in range(1, 1000): 
-                temppool.append(word + str(num)) 
-                temppool.append(str(num) + word) 
+            temppool.extend([word + str(x) for x in range(1,1000)])
+            temppool.extend([str(x) + word for x in range(1, 1000)])
             with open(keynums, "r") as magicnums: 
                 for magicnum in magicnums: 
                     temppool.append(word + str(magicnum).rstrip()) 
